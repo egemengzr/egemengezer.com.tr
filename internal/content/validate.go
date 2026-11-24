@@ -49,6 +49,7 @@ func (c *Content) Validate() error {
 	for _, l := range s.Languages {
 		v.text("profile.yaml cv", p.CV, l)
 		v.text("profile.yaml status", p.Status, l)
+		v.text("profile.yaml title", p.Title, l)
 		v.text("profile.yaml role", p.Role, l)
 		v.text("profile.yaml summary", p.Summary, l)
 		v.text("profile.yaml description", p.Description, l)
@@ -88,6 +89,9 @@ func (c *Content) Validate() error {
 			v.text(where+"/meta.yaml period", pr.Period, l)
 			v.text(where+"/meta.yaml title", pr.Title, l)
 			v.text(where+"/meta.yaml summary", pr.Summary, l)
+			if pr.Cover != "" {
+				v.text(where+"/meta.yaml cover_alt", pr.CoverAlt, l)
+			}
 			if len(pr.Result) > 0 {
 				v.text(where+"/meta.yaml result", pr.Result, l)
 			}

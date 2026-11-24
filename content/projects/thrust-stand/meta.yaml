@@ -6,4 +6,7 @@ summary:
   tr: Kendi tasarladığım PCB, bit-banged HX711 sürücüsü ve CRC'li UART çerçeveleriyle gerçek zamanlı ölçüm.
   en: My own PCB, a bit-banged HX711 driver and CRC-checked UART frames for real-time measurement.
 cover: stand.jpg
+cover_alt:
+  tr: "Açık havada bir bankın üzerine kurulmuş itki test standı ve kabloları"
+  en: "The thrust test stand and its wiring set up on an outdoor bench"
 tags: [STM32F3, C, HX711, MPU6050, KiCad, PySide6]

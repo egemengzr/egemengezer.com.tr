@@ -6,6 +6,9 @@ summary:
   tr: Lidar taramasındaki duvarları ANTSAC ile doğru parçalarına ayırıp robotun yanaşacağı kesişimi seçen C++ uygulaması.
   en: A C++ tool that splits the walls in a Lidar scan into line segments with ANTSAC and picks the intersection the robot should dock at.
 cover: app.png
+cover_alt:
+  tr: "Lidar noktaları, bulunan doğru parçaları ve kesişimleri gösteren uygulama penceresi"
+  en: "The app window showing Lidar points, detected segments and their intersections"
 tags: [C++, CMake, libcurl, SFML, ImGui, ImPlot]
 links:
   - label: { tr: Kaynak kod, en: Source code }

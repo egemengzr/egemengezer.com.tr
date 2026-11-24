@@ -26,6 +26,21 @@ The site is built to be readable within a second on a phone.
 - **Assets are immutable.** File names contain a content hash and are cached
   for a year.
 
+## Search engines and AI crawlers
+
+Generated with every build, nothing to maintain by hand:
+
+- `sitemap.xml` and `robots.txt`; each page has a canonical URL and
+  `hreflang` links to its other language.
+- JSON-LD on the home page: a `WebSite` node, which gives Google the site
+  name it shows above the result, and a `Person` node with GitHub and
+  LinkedIn.
+- `llms.txt` ([llmstxt.org](https://llmstxt.org)): a Markdown index of the
+  pages and projects for language models.
+
+The home page `<title>` is `title` in `content/profile.yaml`; project pages
+use `<project title> · <name>`.
+
 ## Layout
 
 ```
@@ -60,7 +75,9 @@ The first build encodes all images; later builds reuse `.cache/img`.
 
 1. Copy an existing folder under `content/projects/` and rename it. The
    folder name is the URL: lower-case words joined by hyphens.
-2. Edit `meta.yaml`. `order` sets the position on the home page.
+2. Edit `meta.yaml`. `order` sets the position on the home page. With a
+   `cover`, also write `cover_alt`: what the picture shows, not what the
+   project is (the title is already next to it).
 3. Write `tr.md` and `en.md`. Both are required.
 4. Put images in the folder and reference them by file name. Export at
    most 1600px on the long side (JPEG ~88 quality, or PNG for
@@ -68,7 +85,8 @@ The first build encodes all images; later builds reuse `.cache/img`.
 5. `go run . serve` to preview, then commit.
 
 The build stops with a list of every problem it finds: missing
-translations, unknown keys in YAML, missing images, a page over budget.
+translations, unknown keys in YAML, missing images, a page over budget, a
+`<title>` over 60 characters (search results cut longer ones off).
 
 ### Text fields
 

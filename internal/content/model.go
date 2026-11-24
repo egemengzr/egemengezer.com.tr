@@ -28,6 +28,16 @@ type Site struct {
 // DefaultLang returns the first configured language.
 func (s *Site) DefaultLang() Lang { return s.Languages[0] }
 
+// HasLang reports whether l is one of the configured languages.
+func (s *Site) HasLang(l Lang) bool {
+	for _, x := range s.Languages {
+		if x == l {
+			return true
+		}
+	}
+	return false
+}
+
 // Profile is the person-level content from content/profile.yaml: the hero,
 // experience, skills and contact details on the home page.
 type Profile struct {
@@ -39,6 +49,7 @@ type Profile struct {
 	CV       Text   `yaml:"cv"`       // per language: site-absolute path of the PDF in static/
 
 	Status      Text `yaml:"status"`      // availability line above the name
+	Title       Text `yaml:"title"`       // home page <title>; at most 60 characters so search results show it whole
 	Role        Text `yaml:"role"`        // one-line description under the name
 	Summary     Text `yaml:"summary"`     // two or three sentences
 	Description Text `yaml:"description"` // <meta name="description">, ~155 characters
@@ -86,6 +97,11 @@ type Project struct {
 	// Cover is an optional image relative to Dir, used as the home page
 	// thumbnail and the hero image of the detail page.
 	Cover string `yaml:"cover"`
+
+	// CoverAlt describes what the cover image shows, for screen readers
+	// and image search. Required when Cover is set. Describe the picture,
+	// not the project: the title is already next to it.
+	CoverAlt Text `yaml:"cover_alt"`
 
 	// Bars is an optional before/after chart shown on the home page row.
 	Bars    []Bar   `yaml:"bars"`

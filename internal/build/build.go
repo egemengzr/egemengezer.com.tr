@@ -26,6 +26,7 @@ import (
 	"sort"
 	"strings"
 	"time"
+	"unicode/utf8"
 
 	"egemengezer.com.tr/site/internal/content"
 	"egemengezer.com.tr/site/internal/imaging"
@@ -277,12 +278,12 @@ func (b *builder) projectViews(l content.Lang) ([]*projectView, error) {
 			}
 			// Thumbnails are decorative next to the visible title, hence
 			// the empty alt; they load lazily because most are off-screen.
-			v.Thumb = picture(thumb, "", false)
+			v.Thumb = picture(thumb, p.CoverAlt.In(l), false)
 			cover, err := b.imgs.Process(src, p.Slug+"-cover", imaging.Content)
 			if err != nil {
 				return nil, err
 			}
-			v.Cover = picture(cover, v.Title, true)
+			v.Cover = picture(cover, p.CoverAlt.In(l), true)
 		}
 		for _, bar := range p.Bars {
 			v.Bars = append(v.Bars, barView{bar.Label.In(l), fmt.Sprintf("%.1f", clampPct(bar.Value/p.BarsMax*100))})
@@ -363,11 +364,11 @@ func (b *builder) basePage(l content.Lang, canonicalPath func(content.Lang) stri
 
 func (b *builder) renderHome(l content.Lang, projects []*projectView) error {
 	d := b.basePage(l, b.homeURL)
-	d.Title = d.Profile.Name + " · " + d.Profile.Role
+	d.Title = b.c.Profile.Title.In(l)
 	d.Description = d.Profile.Description
 	d.Projects = projects
 	d.OGType = "profile"
-	d.JSONLD = b.personJSONLD(l)
+	d.JSONLD = b.homeJSONLD(l)
 	return b.write(b.homeURL(l), "home", d)
 }
 
@@ -388,12 +389,15 @@ func (b *builder) renderNotFound() error {
 	return b.writeFile("/404.html", "notfound", d)
 }
 
-// personJSONLD describes the site owner for search engines (schema.org).
-func (b *builder) personJSONLD(l content.Lang) template.JS {
+// homeJSONLD describes the site and its owner for search engines
+// (schema.org). The WebSite node gives Google the site name it shows above
+// the result; the Person node is what the site is about.
+func (b *builder) homeJSONLD(l content.Lang) template.JS {
 	p := &b.c.Profile
-	doc := map[string]any{
-		"@context": "https://schema.org",
+	site := b.c.Site.BaseURL + "/"
+	person := map[string]any{
 		"@type":    "Person",
+		"@id":      site + "#person",
 		"name":     p.Name,
 		"url":      b.c.Site.BaseURL + b.homeURL(l),
 		"email":    "mailto:" + p.Email,
@@ -404,11 +408,26 @@ func (b *builder) personJSONLD(l content.Lang) template.JS {
 			"https://www.linkedin.com/in/" + p.LinkedIn + "/",
 		},
 	}
+	website := map[string]any{
+		"@type":      "WebSite",
+		"@id":        site + "#website",
+		"url":        site,
+		"name":       p.Name,
+		"inLanguage": string(l),
+		"publisher":  map[string]any{"@id": site + "#person"},
+	}
+	doc := map[string]any{
+		"@context": "https://schema.org",
+		"@graph":   []any{website, person},
+	}
 	j, _ := json.Marshal(doc)
 	// json.Marshal escapes <, > and & as < etc., so the payload cannot
 	// close the surrounding <script> element.
 	return template.JS(j)
 }
+
+// maxTitleChars is where search engines start truncating a <title>.
+const maxTitleChars = 60
 
 // write renders a page to <urlPath>index.html.
 func (b *builder) write(urlPath, tplName string, d *pageData) error {
@@ -422,6 +441,10 @@ func (b *builder) writeFile(urlPath, tplName string, d *pageData) error {
 	var buf bytes.Buffer
 	if err := b.tpl[tplName].ExecuteTemplate(&buf, "base", d); err != nil {
 		return fmt.Errorf("render %s: %w", urlPath, err)
+	}
+	if n := utf8.RuneCountInString(d.Title); n > maxTitleChars {
+		return fmt.Errorf("%s: title %q is %d characters, over %d; search results cut it off "+
+			"(shorten profile.yaml title or the project title)", urlPath, d.Title, n, maxTitleChars)
 	}
 	out := buf.Bytes()
 	stat := PageStat{Path: urlPath, Bytes: len(out), Gzip: gzipSize(out)}
@@ -437,7 +460,8 @@ func (b *builder) writeFile(urlPath, tplName string, d *pageData) error {
 	return os.WriteFile(dst, out, 0o644)
 }
 
-// writeExtras writes the sitemap, robots.txt and the _redirects file.
+// writeExtras writes the sitemap, robots.txt, llms.txt and the _redirects
+// file.
 func (b *builder) writeExtras() error {
 	s := &b.c.Site
 	var sm strings.Builder
@@ -452,6 +476,7 @@ func (b *builder) writeExtras() error {
 	files := map[string]string{
 		"sitemap.xml": sm.String(),
 		"robots.txt":  "User-agent: *\nAllow: /\nSitemap: " + s.BaseURL + "/sitemap.xml\n",
+		"llms.txt":    b.llmsTxt(),
 		// "/" has no page of its own; the default language is the home.
 		// Applied at Cloudflare's edge without invoking a Worker. 302
 		// rather than 301 because browsers cache a 301 indefinitely, which
@@ -464,6 +489,32 @@ func (b *builder) writeExtras() error {
 		}
 	}
 	return nil
+}
+
+// llmsTxt renders /llms.txt (llmstxt.org): a plain Markdown index of the
+// site for language models, so they can find the pages without parsing
+// HTML. It uses English where available, since that is what most models
+// are queried in, and lists every language's home page.
+func (b *builder) llmsTxt() string {
+	s, p := &b.c.Site, &b.c.Profile
+	l := content.Lang("en")
+	if !s.HasLang(l) {
+		l = s.DefaultLang()
+	}
+	var w strings.Builder
+	fmt.Fprintf(&w, "# %s\n\n> %s\n\n%s\n\n", p.Name, p.Description.In(l), p.Summary.In(l))
+	w.WriteString("## Pages\n\n")
+	for _, o := range s.Languages {
+		fmt.Fprintf(&w, "- [%s (%s)](%s%s)\n", p.Name, o, s.BaseURL, b.homeURL(o))
+		fmt.Fprintf(&w, "- [CV, PDF (%s)](%s%s)\n", o, s.BaseURL, p.CV.In(o))
+	}
+	w.WriteString("\n## Projects\n\n")
+	for _, pr := range b.c.Projects {
+		fmt.Fprintf(&w, "- [%s](%s%s): %s\n", pr.Title.In(l), s.BaseURL, b.projectURL(l, pr.Slug), pr.Summary.In(l))
+	}
+	fmt.Fprintf(&w, "\n## Contact\n\n- Email: %s\n- GitHub: https://github.com/%s\n- LinkedIn: https://www.linkedin.com/in/%s/\n",
+		p.Email, p.GitHub, p.LinkedIn)
+	return w.String()
 }
 
 // ---- Templates and CSS ------------------------------------------------
