@@ -24,9 +24,9 @@ jobs:
   build:
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
 
-      - uses: actions/setup-go@v5
+      - uses: actions/setup-go@v7
         with:
           go-version-file: go.mod
 
@@ -37,7 +37,7 @@ jobs:
 
       # Encoded images are keyed by a hash of their source, so the cache
       # stays valid across commits and only new or changed images encode.
-      - uses: actions/cache@v4
+      - uses: actions/cache@v6
         with:
           path: .cache/img
           key: img-${{ hashFiles('content/**/*.jpg', 'content/**/*.jpeg', 'content/**/*.png', 'content/**/*.webp') }}
@@ -52,7 +52,7 @@ jobs:
       - name: Build site
         run: go run . build
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: dist
           path: dist
@@ -67,14 +67,14 @@ jobs:
       name: production
       url: https://egemengezer.com.tr
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
 
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           name: dist
           path: dist
 
-      - uses: cloudflare/wrangler-action@v3
+      - uses: cloudflare/wrangler-action@v4
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
