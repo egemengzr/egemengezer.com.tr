@@ -26,8 +26,8 @@ ui:
   cv_label: CV
   cv_file: PDF
   references: { tr: Referanslar talep üzerine paylaşılır., en: References available on request. }
-  colophon: { tr: Statik HTML · JavaScript yok, en: Static HTML · no JavaScript }
   all_projects: { tr: Tüm projeler, en: All projects }
+  details: { tr: Detaylar, en: Details }
   more_projects: { tr: Diğer projeler, en: More projects }
   prev: { tr: Önceki, en: Previous }
   next: { tr: Sonraki, en: Next }

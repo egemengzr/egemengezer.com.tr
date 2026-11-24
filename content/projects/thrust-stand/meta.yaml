@@ -5,6 +5,5 @@ title: { tr: İtki test standı, en: Thrust test stand }
 summary:
   tr: Kendi tasarladığım PCB, bit-banged HX711 sürücüsü ve CRC'li UART çerçeveleriyle gerçek zamanlı ölçüm.
   en: My own PCB, a bit-banged HX711 driver and CRC-checked UART frames for real-time measurement.
-result: { tr: Donanım + firmware, en: Hardware + firmware }
 cover: stand.jpg
 tags: [STM32F3, C, HX711, MPU6050, KiCad, PySide6]

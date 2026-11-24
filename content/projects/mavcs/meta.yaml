@@ -1,0 +1,12 @@
+order: 5
+context: { tr: Kişisel, en: Personal }
+period: 2025 – 2026
+title: { tr: MavCs · .NET için MAVLink kütüphanesi, en: MavCs · a MAVLink library for .NET }
+summary:
+  tr: MAVLink v1/v2 çerçeveleme, CRC-16/X25 ve UDP/seri bağlantı. pymavlink'e karşı doğrulandı.
+  en: MAVLink v1/v2 framing, CRC-16/X25 and UDP/serial transports, verified against pymavlink.
+cover: frame.png
+tags: [C#, .NET 9, .NET 10, MAVLink, xUnit, GitHub Actions]
+links:
+  - label: { tr: Kaynak kod, en: Source code }
+    url: https://github.com/egemengzr/MavCs

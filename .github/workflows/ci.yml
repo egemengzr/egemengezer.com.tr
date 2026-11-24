@@ -7,9 +7,9 @@
 name: ci
 
 on:
-  push:
-    branches: [main, dev]
   pull_request:
+  push:
+    branches: [main]
   workflow_dispatch:
 
 permissions:

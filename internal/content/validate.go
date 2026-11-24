@@ -88,7 +88,9 @@ func (c *Content) Validate() error {
 			v.text(where+"/meta.yaml period", pr.Period, l)
 			v.text(where+"/meta.yaml title", pr.Title, l)
 			v.text(where+"/meta.yaml summary", pr.Summary, l)
-			v.text(where+"/meta.yaml result", pr.Result, l)
+			if len(pr.Result) > 0 {
+				v.text(where+"/meta.yaml result", pr.Result, l)
+			}
 			for i, b := range pr.Bars {
 				v.text(fmt.Sprintf("%s/meta.yaml bars[%d].label", where, i), b.Label, l)
 			}

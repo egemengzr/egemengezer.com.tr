@@ -1,6 +1,9 @@
 {{- /*
   home: the CV page. Order follows what a recruiter reading on a phone
   looks for first: availability, who, how to reach, then evidence.
+
+  The CV and every off-site link open in a new tab, so a reader who opens
+  the PDF or a profile still has this page behind it.
 */ -}}
 {{define "content" -}}
 <div class="wrap">
@@ -13,7 +16,7 @@
 <p class="role">{{.Role}}</p>
 <p class="summary">{{.Summary}}</p>
 <div class="cta">
-<a class="btn btn-primary" href="{{.CV}}">{{$.UI.download_cv}}</a>
+<a class="btn btn-primary" href="{{.CV}}" target="_blank" rel="noopener">{{$.UI.download_cv}}</a>
 <a class="btn btn-plain" href="mailto:{{.Email}}">{{$.UI.send_email}}</a>
 </div>
 </div>
@@ -48,7 +51,7 @@
 {{if .Bars}}<span class="mini-bars" aria-hidden="true">{{range .Bars}}<span>{{.Label}}<i style="width:{{.Pct}}%"></i></span>{{end}}</span>
 {{end}}<span class="tags">{{join .Tags " · "}}</span>
 </span>
-<span class="proj-res"><span>{{.Result}}</span><span aria-hidden="true">→</span></span>
+<span class="proj-res"><span>{{if .Result}}{{.Result}}{{else}}{{$.UI.details}}{{end}}</span><span aria-hidden="true">→</span></span>
 </a></li>
 {{end}}</ul>
 </section>
@@ -65,9 +68,9 @@
 <h2 id="h-contact"><span class="num">4</span>{{$.UI.contact}}</h2>
 <div class="contact">
 <a href="mailto:{{.Email}}"><span>{{$.UI.email}}</span><span>{{.Email}}</span></a>
-<a href="{{.GitHubURL}}"><span>GitHub</span><span>{{.GitHub}}</span></a>
-<a href="{{.LinkedInURL}}"><span>LinkedIn</span><span>{{.Name}}</span></a>
-<a href="{{.CV}}"><span>{{$.UI.cv_label}}</span><span>{{$.UI.cv_file}}</span></a>
+<a href="{{.GitHubURL}}" target="_blank" rel="noopener"><span>GitHub</span><span>{{.GitHub}}</span></a>
+<a href="{{.LinkedInURL}}" target="_blank" rel="noopener"><span>LinkedIn</span><span>{{.Name}}</span></a>
+<a href="{{.CV}}" target="_blank" rel="noopener"><span>{{$.UI.cv_label}}</span><span>{{$.UI.cv_file}}</span></a>
 </div>
 <p class="note">{{$.UI.references}}</p>
 </section>

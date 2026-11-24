@@ -11,14 +11,14 @@
 <p class="meta">{{.Context}} · {{.Period}}</p>
 <h1>{{.Title}}</h1>
 <p class="lead">{{.Summary}}</p>
-<p><span class="res">{{.Result}}</span></p>
-<p class="tags">{{join .Tags " · "}}</p>
+{{if .Result}}<p><span class="res">{{.Result}}</span></p>
+{{end}}<p class="tags">{{join .Tags " · "}}</p>
 </header>
 {{if .Cover}}<figure class="doc-cover">{{.Cover}}</figure>
 {{end}}<div class="prose">
 {{.Body}}
 </div>
-{{if .Links}}<p class="doc-links">{{range .Links}}<a class="btn btn-line" href="{{.URL}}">{{.Label}} ↗</a>{{end}}</p>
+{{if .Links}}<p class="doc-links">{{range .Links}}<a class="btn btn-line" href="{{.URL}}" target="_blank" rel="noopener">{{.Label}} ↗</a>{{end}}</p>
 {{end}}<aside class="doc-cta">
 <p>{{$.UI.project_cta}}</p>
 <a class="btn btn-primary" href="mailto:{{$.Profile.Email}}">{{$.UI.send_email}}</a>
