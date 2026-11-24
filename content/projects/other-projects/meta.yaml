@@ -5,7 +5,6 @@ title: { tr: Diğer projeler, en: Other projects }
 summary:
   tr: MavCs (.NET MAVLink kütüphanesi), akıllı filament kurutma kutusu, Lidar ile otonom yanaşma.
   en: MavCs (a MAVLink library for .NET), a smart filament drybox, Lidar-based autonomous docking.
-result: { tr: 3 proje, en: 3 projects }
 cover: drybox-board.jpg
 tags: [C#, .NET 9, ESP-IDF, KiCad, C++]
 links:

@@ -9,11 +9,11 @@ import (
 
 func TestTextScalarAppliesToAllLanguages(t *testing.T) {
 	var v struct{ T Text }
-	if err := yaml.Unmarshal([]byte(`t: Pulse Systech`), &v); err != nil {
+	if err := yaml.Unmarshal([]byte(`t: Pulsesystech`), &v); err != nil {
 		t.Fatal(err)
 	}
 	for _, l := range []Lang{"tr", "en"} {
-		if got := v.T.In(l); got != "Pulse Systech" {
+		if got := v.T.In(l); got != "Pulsesystech" {
 			t.Errorf("In(%q) = %q", l, got)
 		}
 	}

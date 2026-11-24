@@ -22,11 +22,11 @@ role:
 summary:
   tr: >-
     Kılavuz KOUSTECH takım kaptanıyım (Teknofest 2026 Savaşan İHA, Türkiye 4.'sü)
-    ve Pulse Systech'te NVIDIA Jetson kartları için BSP ve flash araçları geliştiren
+    ve Pulsesystech'te NVIDIA Jetson kartları için BSP ve flash araçları geliştiren
     uzun dönem stajyerim.
   en: >-
     Captain of Kılavuz KOUSTECH (4th in Türkiye at Teknofest 2026 Combat UAV) and a
-    long-term intern at Pulse Systech, building BSP and flashing tools for NVIDIA
+    long-term intern at Pulsesystech, building BSP and flashing tools for NVIDIA
     Jetson boards.
 
 description:
@@ -48,7 +48,7 @@ facts:
     value: { tr: "Türkçe, İngilizce (B1)", en: "Turkish, English (B1)" }
 
 experience:
-  - org: Pulse Systech
+  - org: Pulsesystech
     period: { tr: Eki 2026 – Devam, en: Oct 2026 – Present }
     role: { tr: "Uzun Dönem Stajyer, Gömülü Linux", en: "Long-term Intern, Embedded Linux" }
     text:

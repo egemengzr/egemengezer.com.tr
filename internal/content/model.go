@@ -80,7 +80,7 @@ type Project struct {
 	Period  Text     `yaml:"period"`
 	Title   Text     `yaml:"title"`
 	Summary Text     `yaml:"summary"` // one sentence for the home page row
-	Result  Text     `yaml:"result"`  // the headline outcome, shown in the accent colour
+	Result  Text     `yaml:"result"`  // optional headline outcome, in the accent colour; leave out rather than pad
 	Tags    []string `yaml:"tags"`
 
 	// Cover is an optional image relative to Dir, used as the home page
