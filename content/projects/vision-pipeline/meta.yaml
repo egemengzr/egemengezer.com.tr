@@ -3,11 +3,11 @@ context: Kılavuz KOUSTECH
 period: { tr: 2026 – Devam, en: 2026 – Present }
 title: { tr: "Görüntü işleme hattı, kamera ve mesh ağ", en: "Vision pipeline, camera system and mesh network" }
 summary:
-  tr: YOLO ve tracker'ı TensorRT FP16'ya taşıdım, her karede yeniden kurulan bir nesneyi tek seferlik hale getirdim.
-  en: Moved the YOLO detector and tracker to TensorRT FP16 and removed an object the tracker rebuilt every frame.
+  tr: YOLO ve MixFormerV2'yi TensorRT FP16'ya taşıdım, kare başına bellek ayırmayı ve fazla GPU senkronizasyonlarını kaldırdım.
+  en: Moved YOLO and MixFormerV2 to TensorRT FP16 and removed per-frame allocations and extra GPU synchronisations.
 result: 12–14 → 55–60 FPS
 cover: detection.jpg
-tags: [Python, YOLO, TensorRT, FP16, CPL, batman-adv]
+tags: [Python, TensorRT, CUDA, MixFormerV2, YOLOv8, GStreamer, MAVLink, batman-adv]
 bars_max: 60
 bars:
   - label: { tr: önce, en: before }
