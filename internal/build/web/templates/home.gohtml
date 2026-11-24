@@ -1,0 +1,76 @@
+{{- /*
+  home: the CV page. Order follows what a recruiter reading on a phone
+  looks for first: availability, who, how to reach, then evidence.
+*/ -}}
+{{define "content" -}}
+<div class="wrap">
+{{with .Profile}}
+<section class="hero">
+<div class="hero-in">
+<div class="hero-text">
+<p class="status">{{.Status}}</p>
+<h1>{{.Name}}</h1>
+<p class="role">{{.Role}}</p>
+<p class="summary">{{.Summary}}</p>
+<div class="cta">
+<a class="btn btn-primary" href="{{.CV}}">{{$.UI.download_cv}}</a>
+<a class="btn btn-plain" href="mailto:{{.Email}}">{{$.UI.send_email}}</a>
+</div>
+</div>
+<div class="photo">{{.Photo}}</div>
+</div>
+<dl class="facts">
+{{range .Facts}}<div><dt class="label">{{.Label}}</dt><dd>{{.Value}}</dd></div>
+{{end}}</dl>
+</section>
+
+<section class="sec" id="experience" aria-labelledby="h-exp">
+<h2 id="h-exp"><span class="num">1</span>{{$.UI.experience}}</h2>
+<div class="rows">
+{{range .Experience}}<div>
+<p class="when">{{.Period}}</p>
+<div><h3>{{.Org}}</h3><p class="sub">{{.Role}}</p><p>{{.Text}}</p></div>
+</div>
+{{end}}</div>
+</section>
+{{end}}
+
+<section class="sec" id="projects" aria-labelledby="h-proj">
+<h2 id="h-proj"><span class="num">2</span>{{.UI.projects}}</h2>
+<ul class="projects">
+{{range .Projects}}<li><a class="proj{{if not .Thumb}} proj-nothumb{{end}}" href="{{.URL}}">
+{{if .Thumb}}<span class="thumb">{{.Thumb}}</span>
+{{end}}
+<span class="proj-main">
+<span class="meta">{{.Context}} · {{.Period}}</span>
+<span class="proj-title">{{.Title}}</span>
+<span class="proj-sum">{{.Summary}}</span>
+{{if .Bars}}<span class="mini-bars" aria-hidden="true">{{range .Bars}}<span>{{.Label}}<i style="width:{{.Pct}}%"></i></span>{{end}}</span>
+{{end}}<span class="tags">{{join .Tags " · "}}</span>
+</span>
+<span class="proj-res"><span>{{.Result}}</span><span aria-hidden="true">→</span></span>
+</a></li>
+{{end}}</ul>
+</section>
+
+{{with .Profile}}
+<section class="sec" id="skills" aria-labelledby="h-skills">
+<h2 id="h-skills"><span class="num">3</span>{{$.UI.skills}}</h2>
+<dl class="rows kv">
+{{range .Skills}}<div><dt>{{.Label}}</dt><dd>{{.Value}}</dd></div>
+{{end}}</dl>
+</section>
+
+<section class="sec" id="contact" aria-labelledby="h-contact">
+<h2 id="h-contact"><span class="num">4</span>{{$.UI.contact}}</h2>
+<div class="contact">
+<a href="mailto:{{.Email}}"><span>{{$.UI.email}}</span><span>{{.Email}}</span></a>
+<a href="{{.GitHubURL}}"><span>GitHub</span><span>{{.GitHub}}</span></a>
+<a href="{{.LinkedInURL}}"><span>LinkedIn</span><span>{{.Name}}</span></a>
+<a href="{{.CV}}"><span>{{$.UI.cv_label}}</span><span>{{$.UI.cv_file}}</span></a>
+</div>
+<p class="note">{{$.UI.references}}</p>
+</section>
+{{end}}
+</div>
+{{- end}}

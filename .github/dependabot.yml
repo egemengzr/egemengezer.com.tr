@@ -1,0 +1,19 @@
+# Monthly update PRs for Go modules and GitHub Actions. CI builds each one;
+# merge when green. A failing update never reaches the live site.
+version: 2
+updates:
+  - package-ecosystem: gomod
+    directory: /
+    schedule:
+      interval: monthly
+    groups:
+      go-modules:
+        patterns: ["*"]
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    groups:
+      actions:
+        patterns: ["*"]

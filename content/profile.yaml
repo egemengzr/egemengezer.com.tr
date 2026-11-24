@@ -1,0 +1,90 @@
+# The home page: hero, experience, skills and contact.
+
+name: Egemen Gezer
+photo: profile.jpg
+email: egemen@egemengezer.com.tr
+github: egemengzr
+linkedin: egemen-gezer-295b1927a
+# Served from static/cv/. These files are public: compile them with
+# \AyarReferans{false} so the reference's contact details are not included.
+cv:
+  tr: /cv/Egemen_Gezer_CV_TR.pdf
+  en: /cv/Egemen_Gezer_CV_EN.pdf
+
+status:
+  tr: Yaz stajı arıyor
+  en: Looking for a summer internship
+
+role:
+  tr: Bilgisayar Mühendisliği öğrencisi · Gömülü sistemler ve gömülü Linux
+  en: Computer Engineering student · Embedded systems and embedded Linux
+
+summary:
+  tr: >-
+    Kılavuz KOUSTECH takım kaptanıyım (Teknofest 2026 Savaşan İHA, Türkiye 4.'sü)
+    ve Pulse Systech'te NVIDIA Jetson kartları için BSP ve flash araçları geliştiren
+    uzun dönem stajyerim.
+  en: >-
+    Captain of Kılavuz KOUSTECH (4th in Türkiye at Teknofest 2026 Combat UAV) and a
+    long-term intern at Pulse Systech, building BSP and flashing tools for NVIDIA
+    Jetson boards.
+
+description:
+  tr: >-
+    Egemen Gezer: gömülü sistemler ve gömülü Linux üzerine çalışan Bilgisayar
+    Mühendisliği öğrencisi. Projeler, deneyim ve iletişim.
+  en: >-
+    Egemen Gezer: Computer Engineering student working on embedded systems and
+    embedded Linux. Projects, experience and contact.
+
+facts:
+  - label: { tr: Konum, en: Location }
+    value: "Kocaeli, Türkiye"
+  - label: { tr: Eğitim, en: Education }
+    value: { tr: Kocaeli Üni. · 3. sınıf · 2028, en: Kocaeli Univ. · 3rd year · 2028 }
+  - label: { tr: Odak, en: Focus }
+    value: { tr: "Gömülü Linux, firmware, İHA", en: "Embedded Linux, firmware, UAVs" }
+  - label: { tr: Diller, en: Languages }
+    value: { tr: "Türkçe, İngilizce (B1)", en: "Turkish, English (B1)" }
+
+experience:
+  - org: Pulse Systech
+    period: { tr: Eki 2026 – Devam, en: Oct 2026 – Present }
+    role: { tr: "Uzun Dönem Stajyer, Gömülü Linux", en: "Long-term Intern, Embedded Linux" }
+    text:
+      tr: >-
+        Elle yapılan BSP kurulum ve flash sürecini tek komuta indiren Pulse BSP
+        Manager'ı geliştirdim. CTO mentorluğunda kernel yapılandırması ve özel kernel
+        derlemeyi öğreniyorum.
+      en: >-
+        Built Pulse BSP Manager, which turns a manual BSP install and flashing
+        process into one command. Learning kernel configuration and custom kernel
+        builds under the CTO's mentorship.
+  - org: Kılavuz KOUSTECH · Teknofest Savaşan İHA
+    period: { tr: Eki 2024 – Devam, en: Oct 2024 – Present }
+    role:
+      tr: Takım Kaptanı (Eki 2026–) · Simülasyon ve Test Sistemleri Geliştiricisi (2024–2026)
+      en: Team Captain (Oct 2026–) · Simulation and Test Systems Developer (2024–2026)
+    text:
+      tr: >-
+        Takım Teknofest 2026'da Türkiye 4.'sü oldu. Uçuş simülatörü, itki test standı
+        ve görüntü işleme hattı benim işlerim. Şu an tüm araçları bağlayan mesh ağını
+        kuruyorum.
+      en: >-
+        The team placed 4th in Türkiye at Teknofest 2026. I built the flight
+        simulator, the thrust test stand and the vision pipeline optimisation, and I
+        am now building the mesh network that links all our vehicles.
+
+skills:
+  - label: { tr: Gömülü ve Linux, en: Embedded and Linux }
+    value: STM32, ESP32, NVIDIA Jetson Linux (L4T), Raspberry Pi, UART, SPI, I2C, USB
+  - label: { tr: Diller ve araçlar, en: Languages and tools }
+    value: C, C++, Python, C#, Java, Bash, Linux, Git, CMake
+  - label: { tr: İHA ve simülasyon, en: UAV and simulation }
+    value: ArduPilot (SITL/HITL), Pixhawk, MAVLink, MATLAB/Simulink, Simulink Coder, Unity
+  - label: { tr: Görüntü ve ağ, en: Vision and networking }
+    value: YOLO, TensorRT (FP16), batman-adv
+  - label: { tr: Donanım, en: Hardware }
+    value:
+      tr: KiCad PCB tasarımı, osiloskop, kamera ve optik seçimi
+      en: KiCad PCB design, oscilloscope, camera and optics selection

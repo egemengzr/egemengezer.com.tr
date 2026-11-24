@@ -1,0 +1,32 @@
+{{- /*
+  project: one project's detail page. The body is Markdown rendered by
+  internal/build/markdown.go; everything around it is fixed so every
+  project page reads the same way.
+*/ -}}
+{{define "content" -}}
+{{with .Project}}
+<article class="doc wrap">
+<p class="crumb"><a href="{{$.HomeURL}}#projects">← {{$.UI.all_projects}}</a></p>
+<header class="doc-head">
+<p class="meta">{{.Context}} · {{.Period}}</p>
+<h1>{{.Title}}</h1>
+<p class="lead">{{.Summary}}</p>
+<p><span class="res">{{.Result}}</span></p>
+<p class="tags">{{join .Tags " · "}}</p>
+</header>
+{{if .Cover}}<figure class="doc-cover">{{.Cover}}</figure>
+{{end}}<div class="prose">
+{{.Body}}
+</div>
+{{if .Links}}<p class="doc-links">{{range .Links}}<a class="btn btn-line" href="{{.URL}}">{{.Label}} ↗</a>{{end}}</p>
+{{end}}<aside class="doc-cta">
+<p>{{$.UI.project_cta}}</p>
+<a class="btn btn-primary" href="mailto:{{$.Profile.Email}}">{{$.UI.send_email}}</a>
+</aside>
+<nav class="pager" aria-label="{{$.UI.more_projects}}">
+{{with .Prev}}<a href="{{.URL}}" rel="prev"><span class="meta">← {{$.UI.prev}}</span><strong>{{.Title}}</strong></a>{{else}}<span></span>{{end}}
+{{with .Next}}<a href="{{.URL}}" rel="next"><span class="meta">{{$.UI.next}} →</span><strong>{{.Title}}</strong></a>{{end}}
+</nav>
+</article>
+{{end}}
+{{- end}}

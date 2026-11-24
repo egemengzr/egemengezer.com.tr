@@ -1,0 +1,10 @@
+order: 3
+context: Kılavuz KOUSTECH
+period: 2024 – 2026
+title: { tr: Otonom uçuş simülatörü (SITL / HITL), en: Autonomous flight simulator (SITL / HITL) }
+summary:
+  tr: Simulink uçuş dinamiği modelini C'ye çevirip Unity'ye gömdüm, UDP ile ArduPilot SITL'e bağladım. HITL eklentisini tasarladım.
+  en: Converted the Simulink flight-dynamics model to C, embedded it in Unity and connected it to ArduPilot SITL over UDP. Designed the HITL extension.
+result: { tr: Sahaya çıkmadan test, en: Testing without the field }
+cover: unity.jpg
+tags: [Simulink Coder, Unity (C#), ArduPilot SITL, UDP, STM32, Pixhawk]

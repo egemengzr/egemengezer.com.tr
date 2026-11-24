@@ -1,0 +1,12 @@
+{{- /*
+  notfound: served by Cloudflare for any unknown path (not_found_handling
+  "404-page" in wrangler.jsonc). The visitor's language is unknown here, so
+  the page offers both.
+*/ -}}
+{{define "content" -}}
+<section class="nf wrap">
+<p class="meta">404</p>
+<h1>Sayfa bulunamadı · Page not found</h1>
+<p><a href="/tr/">Ana sayfaya dön</a> · <a href="/en/">Back to the home page</a></p>
+</section>
+{{- end}}

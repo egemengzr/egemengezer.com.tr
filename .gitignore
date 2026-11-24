@@ -1,0 +1,9 @@
+# Build output and the image encode cache are always regenerated.
+/dist/
+/.cache/
+
+# Wrangler local state.
+/.wrangler/
+/node_modules/
+
+.DS_Store

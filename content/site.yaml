@@ -1,0 +1,34 @@
+# Site-wide settings. Every text field takes either one string for all
+# languages or a { tr: …, en: … } mapping.
+
+base_url: https://egemengezer.com.tr
+
+# The first language is the default: "/" redirects to it.
+languages: [tr, en]
+
+projects_path: { tr: projeler, en: projects }
+
+# Largest allowed HTML page, uncompressed, including the inlined CSS.
+# ~50 KB keeps each page around 12–15 KB over the wire.
+html_budget_bytes: 51200
+
+ui:
+  skip: { tr: İçeriğe geç, en: Skip to content }
+  language: { tr: Dil, en: Language }
+  cv: CV (PDF)
+  download_cv: { tr: CV'yi indir (PDF), en: Download CV (PDF) }
+  send_email: { tr: E-posta gönder, en: Send an email }
+  experience: { tr: Deneyim, en: Experience }
+  projects: { tr: Projeler, en: Projects }
+  skills: { tr: Teknik yetkinlikler, en: Technical skills }
+  contact: { tr: İletişim, en: Contact }
+  email: { tr: E-posta, en: Email }
+  cv_label: CV
+  cv_file: PDF
+  references: { tr: Referanslar talep üzerine paylaşılır., en: References available on request. }
+  colophon: { tr: Statik HTML · JavaScript yok, en: Static HTML · no JavaScript }
+  all_projects: { tr: Tüm projeler, en: All projects }
+  more_projects: { tr: Diğer projeler, en: More projects }
+  prev: { tr: Önceki, en: Previous }
+  next: { tr: Sonraki, en: Next }
+  project_cta: { tr: Bu proje hakkında konuşmak isterseniz yazın., en: Happy to talk through this project in more detail. }
