@@ -1,0 +1,10 @@
+order: 1
+context: Pulse Systech
+period: "2026"
+title: Pulse BSP Manager
+summary:
+  tr: NVIDIA Jetson kartları için BSP kurulumu ve flash'ı otomatikleştiren araç. Toplu flash, JetPack 6 ve 7 desteği.
+  en: Automates installing the company BSP for NVIDIA Jetson carrier boards and flashing them. Mass flashing, JetPack 6 and 7.
+result: { tr: 10+ elle adım → 1 komut, en: 10+ manual steps → 1 command }
+cover: tui-release.jpg
+tags: [Bash, Go (huh), YAML, L4T, JetPack]
