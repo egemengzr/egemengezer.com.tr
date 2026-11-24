@@ -1,0 +1,19 @@
+
+# <type>(<scope>): <summary in imperative mood, max 72 chars>
+#
+# Why this change is needed, and anything a reviewer should know.
+# Wrap at 72 characters. Leave the body out for trivial changes.
+#
+# types:  feat     new capability (a page, a block, a build feature)
+#         fix      a bug fix
+#         content  text, images or projects under content/
+#         style    CSS or templates, no behaviour change
+#         refactor code change with no behaviour change
+#         test     tests only
+#         ci       .github/, wrangler.jsonc, deploy
+#         docs     README, comments
+#         chore    dependencies, tooling
+#
+# scopes: content, build, imaging, markdown, css, templates, ci, deploy
+#
+# Enable once per clone:  git config commit.template .gitmessage
