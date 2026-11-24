@@ -1,0 +1,52 @@
+{{- /*
+  base: the document shell shared by every page.
+
+  Everything render-critical is in this one response: CSS is inlined and
+  there is no JavaScript. The only other request on first paint is the
+  profile photo on the home page, which is marked high priority.
+*/ -}}
+{{define "base" -}}
+<!doctype html>
+<html lang="{{.Lang}}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{.Title}}</title>
+<meta name="description" content="{{.Description}}">
+<link rel="canonical" href="{{.Canonical}}">
+{{range .Alternates}}<link rel="alternate" hreflang="{{.Lang}}" href="{{.URL}}">
+{{end}}<link rel="alternate" hreflang="x-default" href="{{.XDefault}}">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0f1216" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="{{.FontURL}}" as="font" type="font/woff2" crossorigin>
+<meta property="og:type" content="{{.OGType}}">
+<meta property="og:title" content="{{.Title}}">
+<meta property="og:description" content="{{.Description}}">
+<meta property="og:url" content="{{.Canonical}}">
+<meta property="og:locale" content="{{.OGLocale}}">
+{{if .OGImage}}<meta property="og:image" content="{{.OGImage}}">
+{{end}}<meta name="twitter:card" content="summary">
+<style>{{.CSS}}</style>
+{{if .JSONLD}}<script type="application/ld+json">{{.JSONLD}}</script>
+{{end}}</head>
+<body>
+<a class="skip" href="#main">{{.UI.skip}}</a>
+<header class="top">
+<div class="wrap top-in">
+<a class="brand" href="{{.HomeURL}}">EGEMEN GEZER<span>Rev. {{.Rev}}</span></a>
+<div class="top-act">
+<nav class="lang" aria-label="{{.UI.language}}">{{range .Langs}}<a href="{{.URL}}" hreflang="{{.Lang}}" lang="{{.Lang}}"{{if .Current}} aria-current="page"{{end}}>{{.Label}}</a>{{end}}</nav>
+<a class="btn btn-line" href="{{.Profile.CV}}">{{.UI.cv}}</a>
+</div>
+</div>
+</header>
+<main id="main">
+{{template "content" .}}
+</main>
+<footer class="foot">
+<div class="wrap"><p>© {{.Year}} {{.Profile.Name}}</p><p>{{.UI.colophon}}</p></div>
+</footer>
+</body>
+</html>
+{{end}}
