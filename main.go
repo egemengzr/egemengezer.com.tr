@@ -68,8 +68,7 @@ func run(args []string) error {
 	}
 }
 
-// now returns the build time in Istanbul, which sets the "Rev." label and
-// the copyright year. SOURCE_DATE_EPOCH, when set, makes builds
+// now returns the build time in Istanbul, which sets the copyright year. SOURCE_DATE_EPOCH, when set, makes builds
 // reproducible (https://reproducible-builds.org/specs/source-date-epoch/).
 func now() time.Time {
 	loc, err := time.LoadLocation("Europe/Istanbul")

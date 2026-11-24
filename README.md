@@ -22,8 +22,7 @@ The site is built to be readable within a second on a phone.
   layout actually renders (1x and 2x), so a phone never downloads a desktop
   image. Off-screen images load lazily.
 - **Fonts.** System UI font for text; one weight of IBM Plex Mono for labels,
-  split into Latin and Latin Extended so Turkish characters only download
-  the second file when needed.
+  subset to the characters the site uses (~8 KB) and preloaded.
 - **Assets are immutable.** File names contain a content hash and are cached
   for a year.
 
@@ -138,6 +137,19 @@ about 1.5 MB, and history only grows when an image actually changes. LFS
 would add a separate storage and bandwidth quota (consumed by every CI
 checkout) and an extra install step for anyone cloning, for no real
 saving at this size.
+
+### Fonts
+
+`assets/fonts/plex-mono-400.woff2` is IBM Plex Mono Regular subset with
+fontTools. To add characters, edit the range and rebuild from the complete
+font in the `@ibm/plex-mono` npm package:
+
+```sh
+pip install fonttools brotli
+pyftsubset IBMPlexMono-Regular.woff2 --flavor=woff2 --layout-features=kern \
+  --no-hinting --desubroutinize --output-file=assets/fonts/plex-mono-400.woff2 \
+  --unicodes="U+0020-007E,U+00A0-00FF,U+011E-011F,U+0130-0131,U+015E-015F,U+2010-2027,U+2030-203A,U+20AC,U+2190-2195,U+2212"
+```
 
 ## Deployment
 

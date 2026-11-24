@@ -199,7 +199,6 @@ type pageData struct {
 	HomeURL     string
 	Langs       []langLink
 	UI          map[string]string
-	Rev         string
 	Year        int
 	Profile     *profileView
 	Projects    []*projectView
@@ -338,10 +337,9 @@ func (b *builder) basePage(l content.Lang, canonicalPath func(content.Lang) stri
 	d := &pageData{
 		Lang:     l,
 		CSS:      b.css,
-		FontURL:  b.manifest["/assets/fonts/plex-mono-400-latin.woff2"],
+		FontURL:  b.manifest["/assets/fonts/plex-mono-400.woff2"],
 		HomeURL:  b.homeURL(l),
 		UI:       map[string]string{},
-		Rev:      b.opt.Now.Format("2006.01"),
 		Year:     b.opt.Now.Year(),
 		Profile:  b.profileView(l),
 		OGImage:  b.ogImage,
