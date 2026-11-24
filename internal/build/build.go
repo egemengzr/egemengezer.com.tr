@@ -553,14 +553,16 @@ var svgPalette = map[string]string{
 }
 
 var (
-	svgProlog   = regexp.MustCompile(`(?s)<\?xml.*?\?>|<!DOCTYPE.*?>|<!--.*?-->`)
+	svgProlog   = regexp.MustCompile(`(?s)<\?xml.*?\?>|<!DOCTYPE.*?>|<!--.*?-->|<metadata\b.*?</metadata>`)
 	svgHex      = regexp.MustCompile(`(?i)#[0-9a-f]{6}\b|#[0-9a-f]{3}\b`)
 	svgRootSize = regexp.MustCompile(`(?s)(<svg\b[^>]*?)\s(?:width|height)="[^"]*"`)
 	svgRoot     = regexp.MustCompile(`<svg\b`)
+	svgXMLNS    = regexp.MustCompile(`\sxmlns:([A-Za-z][\w.-]*)="[^"]*"`)
 )
 
-// inlineSVG prepares an SVG file for inlining: strips the XML prolog and
-// comments, removes fixed width/height so it scales with its viewBox, maps
+// inlineSVG prepares an SVG file for inlining: strips the XML prolog,
+// comments and <metadata> blocks (editor and provenance data the browser
+// never shows, often larger than the drawing itself), removes fixed width/height so it scales with its viewBox, maps
 // palette colours to theme variables and labels it for screen readers.
 //
 // SVG files come from the site owner's own content folder, so they are
@@ -571,6 +573,14 @@ func inlineSVG(file, alt string) (string, error) {
 		return "", err
 	}
 	s := svgProlog.ReplaceAllString(string(b), "")
+	// Namespace prefixes only served the removed metadata; xlink is the one
+	// prefix drawings still use (xlink:href).
+	s = svgXMLNS.ReplaceAllStringFunc(s, func(m string) string {
+		if svgXMLNS.FindStringSubmatch(m)[1] == "xlink" {
+			return m
+		}
+		return ""
+	})
 	for svgRootSize.MatchString(s) {
 		s = svgRootSize.ReplaceAllString(s, "$1")
 	}
