@@ -1,0 +1,82 @@
+# Build and check every push and pull request; deploy main to Cloudflare.
+#
+# The deploy job only runs after the build job succeeded on main, so a
+# change that breaks the build, a test, or the page size budget never
+# reaches the live site.
+
+name: ci
+
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# Never run two deploys at once; let an in-flight deploy finish.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/main' }}
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+
+      - name: Install libvips (AVIF/WebP encoding)
+        run: |
+          sudo apt-get update -q
+          sudo apt-get install -y -q --no-install-recommends libvips-tools libheif-plugin-aomenc
+
+      # Encoded images are keyed by a hash of their source, so the cache
+      # stays valid across commits and only new or changed images encode.
+      - uses: actions/cache@v4
+        with:
+          path: .cache/img
+          key: img-${{ hashFiles('content/**/*.jpg', 'content/**/*.jpeg', 'content/**/*.png', 'content/**/*.webp') }}
+          restore-keys: img-
+
+      - name: Check formatting
+        run: test -z "$(gofmt -l .)" || { gofmt -l .; exit 1; }
+
+      - run: go vet ./...
+      - run: go test ./...
+
+      - name: Build site
+        run: go run . build
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist
+          include-hidden-files: true
+          retention-days: 7
+
+  deploy:
+    needs: build
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    runs-on: ubuntu-24.04
+    environment:
+      name: production
+      url: https://egemengezer.com.tr
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist
+
+      - uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          wranglerVersion: "4"
+          command: deploy
