@@ -17,13 +17,15 @@ Viewport | visible rows only
 Terminal | VT100 alternate screen
 ```
 
-## My part: data structure and backend
+## My part
 
-The data structure was my design; my teammate mainly built the terminal and interface side.
+I wrote the editor's core: the gap buffer, line nodes and document, the renderer, the viewport, the input manager, the undo/redo command stack, file open/save and the file explorer. My teammate added the keyboard shortcuts, search, replace, jumping between matches and clipboard operations. I fixed the false matches in the KMP search.
 
 - Hybrid data structure: each line is a gap buffer and lines are nodes in a doubly linked list. Typing is O(1) amortized; splitting and merging lines is an O(1) pointer splice.
 
 ![Typing into a gap buffer](gap-buffer-en.svg "Gap buffer: a new character goes into the start of the gap at the cursor. The text to the right never moves, so typing is O(1).")
+
+![Splitting a line](line-split-en.svg "Enter: the text right of the cursor is copied into a new node, which is spliced into the list with an O(1) pointer change. None of the following lines move.")
 
 ## Other technical features of the project
 

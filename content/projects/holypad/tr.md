@@ -17,13 +17,15 @@ Viewport | sadece görünen satırlar
 Terminal | VT100 alternatif ekran
 ```
 
-## Benim kısmım: veri yapısı ve backend
+## Benim kısmım
 
-Veri yapısı benim tasarımımdı. Takım arkadaşım ağırlıklı olarak terminal ve arayüz tarafını yaptı.
+Editörün çekirdeğini ben yazdım: gap buffer, satır düğümleri ve doküman, renderer, viewport, girdi yöneticisi, undo/redo komut yığını, dosya açma/kaydetme ve dosya gezgini. Takım arkadaşım klavye kısayollarını, arama, değiştirme ve eşleşmeler arası gezinmeyi ve pano işlemlerini ekledi. Aramadaki KMP'nin hatalı eşleşmelerini ben düzelttim.
 
 - Hibrit veri yapısı: her satır bir gap buffer, satırlar çift yönlü bağlı listede düğüm. Yazma O(1) amortize, satır bölme ve birleştirme O(1) işaretçi değişikliği.
 
 ![Gap buffer'a yazma](gap-buffer-tr.svg "Gap buffer: yeni karakter imlecin olduğu yere, boş alanın başına yazılır. Sağdaki metin kaydırılmaz, bu yüzden yazma O(1).")
+
+![Satır bölme](line-split-tr.svg "Enter: imlecin sağındaki metin yeni bir düğüme kopyalanır, düğüm listeye O(1) işaretçi değişikliğiyle eklenir. Sonraki satırların hiçbiri kaydırılmaz.")
 
 ## Projenin diğer teknik özellikleri
 
