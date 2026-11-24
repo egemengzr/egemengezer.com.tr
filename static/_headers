@@ -1,0 +1,17 @@
+# Response headers applied by Cloudflare Workers static assets.
+# https://developers.cloudflare.com/workers/static-assets/headers/
+
+# Hashed file names change whenever the content does, so these can be
+# cached for a year without revalidation.
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Security headers for every response. The CSP allows no scripts at all.
+# Styles are inline (one <style> per page, plus any in inlined SVG
+# diagrams); there is no user input on the site to inject into.
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+  X-Frame-Options: DENY
+  Content-Security-Policy: default-src 'none'; img-src 'self'; font-src 'self'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'
