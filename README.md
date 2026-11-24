@@ -141,7 +141,7 @@ saving at this size.
 
 ## Deployment
 
-CI (`.github/workflows/ci.yml`) runs on pushes to `main` and `dev` and on pull requests:
+CI (`.github/workflows/ci.yml`) runs on pull requests and on pushes to `main`:
 formatting, `go vet`, tests, and a full build. Pushes to `main` deploy to
 Cloudflare. A failing build never deploys.
 
