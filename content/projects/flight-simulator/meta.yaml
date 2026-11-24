@@ -7,4 +7,7 @@ summary:
   en: Rebuilt the Unity-embedded first version around a .NET 10 core. N-aircraft scenarios start with one click and physics engines are C ABI plugins.
 result: { tr: Saha öncesi test, en: Pre-field testing }
 cover: unity.jpg
+cover_alt:
+  tr: "Unity'de pistte kalkışa hazırlanan simüle edilmiş sabit kanatlı İHA"
+  en: "A simulated fixed-wing UAV on the runway in Unity"
 tags: [C#, .NET 10, C ABI, JSBSim, Simulink Coder, ArduPilot SITL, MAVLink, Unity, protobuf]

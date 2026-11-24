@@ -15,6 +15,11 @@ status:
   tr: Yaz stajı arıyor
   en: Looking for a summer internship
 
+# <title> of the home page, as search results show it. At most 60 characters.
+title:
+  tr: Egemen Gezer · Gömülü Sistemler ve Gömülü Linux
+  en: Egemen Gezer · Embedded Systems and Embedded Linux
+
 role:
   tr: Bilgisayar Mühendisliği öğrencisi · Gömülü sistemler ve gömülü Linux
   en: Computer Engineering student · Embedded systems and embedded Linux

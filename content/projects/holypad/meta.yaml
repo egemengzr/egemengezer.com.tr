@@ -7,6 +7,9 @@ summary:
   en: Two-person project; I wrote the editor's core. Per-line gap buffers in a doubly linked list.
 result: { tr: O(1) amortize yazma, en: O(1) amortized typing }
 cover: editor.png
+cover_alt:
+  tr: "Terminalde açık bir Markdown dosyasıyla HolyPad"
+  en: "HolyPad in a terminal with a Markdown file open"
 tags: [C++17, POSIX, VT100, CMake]
 links:
   - label: { tr: Kaynak kod, en: Source code }

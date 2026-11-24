@@ -6,4 +6,7 @@ summary:
   tr: ESP32 tabanlı kartı KiCad'de tasarlayıp ürettirdim. ESP-IDF firmware'i sensörü, MOSFET çıkışlarını ve yuvarlak LCD'yi sürüyor.
   en: Designed the ESP32 board in KiCad and had it made. The ESP-IDF firmware drives the sensor, MOSFET outputs and a round LCD.
 cover: board.jpg
+cover_alt:
+  tr: "Elde tutulan, kurutma kutusu için tasarlanmış siyah PCB"
+  en: "The black PCB designed for the drybox, held in a hand"
 tags: [ESP32, ESP-IDF, C, KiCad, BME280, I2C, SPI]

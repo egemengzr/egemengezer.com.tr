@@ -46,6 +46,7 @@ func TestBuildRealContent(t *testing.T) {
 		`hreflang="en"`,
 		`fetchpriority="high"`,
 		`application/ld+json`,
+		`"@type":"WebSite"`,
 	} {
 		if !strings.Contains(string(home), want) {
 			t.Errorf("home page lacks %q", want)
@@ -55,10 +56,14 @@ func TestBuildRealContent(t *testing.T) {
 	if n := strings.Count(string(home), `.pdf" target="_blank" rel="noopener"`); n != 3 {
 		t.Errorf("want 3 CV links opening in a new tab, found %d", n)
 	}
+	// Every image needs a description; project thumbnails use cover_alt.
+	if strings.Contains(string(home), `alt=""`) {
+		t.Error(`home page has an image with alt=""`)
+	}
 	if strings.Contains(string(home), "<script src") {
 		t.Error("the site must not load JavaScript")
 	}
-	for _, f := range []string{"_redirects", "_headers", "sitemap.xml", "robots.txt", "404.html"} {
+	for _, f := range []string{"_redirects", "_headers", "sitemap.xml", "robots.txt", "llms.txt", "404.html"} {
 		if _, err := os.Stat(filepath.Join(out, f)); err != nil {
 			t.Errorf("missing %s: %v", f, err)
 		}
