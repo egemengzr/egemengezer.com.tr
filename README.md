@@ -126,8 +126,8 @@ Draw them with these exact swatches and they are mapped to theme colours:
 | `#1F4FD1` | accent         |
 
 Any other colour is kept as is. Paths whose id starts with `flow` (name the
-layer `flow-1`, `flow-2`… in Illustrator) get a moving dashed line, unless
-the visitor prefers reduced motion. Export with *Styling: Presentation
+layer `flow-1`, `flow-2`… in Illustrator) or that carry the class `flow` get
+a moving dashed line, unless the visitor prefers reduced motion. Export with *Styling: Presentation
 Attributes* and *Responsive* on.
 
 ### Why no Git LFS

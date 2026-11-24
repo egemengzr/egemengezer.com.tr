@@ -254,7 +254,7 @@ figcaption { margin-top: 10px; font: 12px var(--mono); color: var(--muted); }
 
 /* Inline SVG diagrams: authors mark animated connector paths with an id
    starting "flow" (an Illustrator layer name becomes the id on export). */
-.prose svg [id^="flow"] { stroke-dasharray: 6 6; }
+.prose svg [id^="flow"], .prose svg .flow { stroke-dasharray: 6 6; }
 
 /* ---- 404 -------------------------------------------------------------- */
 
@@ -292,7 +292,7 @@ figcaption { margin-top: 10px; font: 12px var(--mono); color: var(--muted); }
   .pipe { --step: .45s; --cycle: calc((var(--n) + 3) * var(--step)); }
   .pipe-step { animation: stage var(--cycle) ease-out infinite; animation-delay: calc(var(--i) * var(--step)); }
   .pipe-link::after { animation: packet-y var(--cycle) linear infinite; animation-delay: calc(var(--i) * var(--step)); }
-  .prose svg [id^="flow"] { animation: dash 1s linear infinite; }
+  .prose svg [id^="flow"], .prose svg .flow { animation: dash 1s linear infinite; }
 
   /* Bars grow as they scroll into view, where the browser supports
      scroll-driven animations; elsewhere they simply render at full size. */
