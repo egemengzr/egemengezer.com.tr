@@ -1,12 +1,12 @@
-order: 8
+order: 10
 context: { tr: Kişisel, en: Personal }
 period: { tr: 2026 – Devam, en: 2026 – Present }
 title: { tr: Akıllı filament kurutma kutusu, en: Smart filament drybox }
 summary:
-  tr: ESP32 tabanlı kartı KiCad'de tasarlayıp ürettirdim. ESP-IDF firmware'i sensörü, MOSFET çıkışlarını ve yuvarlak LCD'yi sürüyor.
-  en: Designed the ESP32 board in KiCad and had it made. The ESP-IDF firmware drives the sensor, MOSFET outputs and a round LCD.
+  tr: ESP32 kartını KiCad'de tasarladım. ESP-IDF firmware'inde captive portal ile Wi-Fi kurulumu, web paneli ve sensör, fan, ısıtıcı sürücüleri var.
+  en: Designed the ESP32 board in KiCad. The ESP-IDF firmware has captive-portal Wi-Fi setup, a web dashboard and drivers for the sensors, fan and heater.
 cover: board.jpg
 cover_alt:
   tr: "Elde tutulan, kurutma kutusu için tasarlanmış siyah PCB"
   en: "The black PCB designed for the drybox, held in a hand"
-tags: [ESP32, ESP-IDF, C, KiCad, BME280, I2C, SPI]
+tags: [ESP32, ESP-IDF, C, FreeRTOS, KiCad, LVGL, I2C, SPI]

@@ -35,7 +35,7 @@ Editörün çekirdeğini ben yazdım: gap buffer, satır düğümleri ve doküma
 - **Diğer:** KMP ile satır içi arama ve değiştirme, ANSI renkli seçim, C++17 `<filesystem>` üzerine kurulu ve dokümanın üstüne katman olarak çizilen dosya gezgini.
 - **POSIX terminal yönetimi:** termios ile raw mod, poll() ile asenkron girdi, SIGWINCH ile yeniden boyutlandırma, shell geçmişini korumak için VT100 alternatif ekran buffer'ı.
 
-![Dosya gezgini](explorer.png "Dokümanın üstüne katman olarak çizilen dosya gezgini")
+![Editör](editor.png "Terminalde açık bir Markdown dosyası: üstte araç çubuğu, solda satır numaraları")
 
 ## Bilinen kısıtlar
 

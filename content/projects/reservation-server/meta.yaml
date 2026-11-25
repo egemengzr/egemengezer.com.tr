@@ -1,0 +1,15 @@
+order: 7
+context: { tr: Yazılım Lab I · ders projesi, en: Software Lab I · course project }
+period: "2026"
+title: { tr: Rezervasyon sunucusu · zamanlama ve kilitler, en: Reservation server · scheduling and locks }
+summary:
+  tr: Dört zamanlama politikalı deterministik simülatör ve kullanıcı/slot başına kilitli, kilitlenmesiz çok iş parçacıklı canlı mod.
+  en: A deterministic simulator with four scheduling policies and a deadlock-free multithreaded live mode with per-user and per-slot locks.
+cover: ui.png
+cover_alt:
+  tr: "Rezervasyon sunucusunun web arayüzü: işçi zaman çizelgesi ve talep tablosu"
+  en: "The reservation server's web interface: worker timeline and request table"
+tags: [Python, threading, Flask, unittest]
+links:
+  - label: { tr: Kaynak kod, en: Source code }
+    url: https://github.com/kouprolab25-2355/registration-reservation-server

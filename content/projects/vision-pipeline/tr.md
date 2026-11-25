@@ -1,6 +1,6 @@
 ## Amaç
 
-Hedef tespitini ve takibini araç üzerinde gerçek zamanlı çalıştırmak, QR kodlu yer hedefini her ışıkta okunur tutmak ve bu sezon tüm araçları ortak bir ağa bağlamak.
+Hedef tespitini ve takibini araç üzerinde gerçek zamanlı çalıştırmak, QR kodlu yer hedefini her ışıkta okunur tutmak ve bu sezon tüm hava araçlarını ve yer sistemlerini ortak bir ağa bağlamak.
 
 ## Mimari
 
@@ -30,6 +30,17 @@ YOLO + tracker TensorRT'de (FP32) | 37.5 | 35–40 FPS
 - Kamera sensörünü (AR0234), lensi ve filtreyi seçtim.
 - Yarışmanın QR kodlu hedefi yerde bir branda üzerinde duruyor ve öğle saatlerinde güneşi yansıtıyor. Bu birçok takım için sorun oldu. Araştırdıktan sonra dairesel polarize (CPL) filtre taktım: metal olmayan yüzeylerden yansıyan ışık büyük ölçüde polarize olduğu için filtre parlamayı bastırıyor. Bizim takım bu sorunu hiç yaşamadı.
 
+## Jetson ortamı ve yer tarafı
+
+Kodun sahada çalışması için uçuş bilgisayarını, yere inen görüntüyü ve saatleri de ben hazırladım.
+
+- **Orin Nano kurulum betiği:** Kartı sıfırdan uçuşa hazırlayan, aşamalı ve tekrar çalıştırılabilir bir betik. Yarıda kalırsa yapılmış işi atlayıp kaldığı yerden devam ediyor.
+  - OpenCV yalnızca bu kartın mimarisi (`CUDA_ARCH_BIN=8.7`) için CUDA, cuDNN ve GStreamer'la derleniyor. Derlemeden önce `CMakeCache.txt` okunuyor; GStreamer ya da CUDA açık değilse 1,5–3 saatlik derleme hiç başlamıyor.
+  - 8 GB RAM'de derleme bellek yetmediği için çöküyordu. Betik SSD'de 16 GB swap açıyor ve paralel iş sayısını (RAM + swap) / 3 GB'a göre seçiyor.
+  - Görüntü işleme ve telemetri ayrı sanal ortamlarda. Görüntü tarafında bir paket güncellemesi telemetriyi bozamıyor; betik bunu iki ortamın birbirinin paketlerini göremediğini test ederek doğruluyor.
+- **Görüntü rölesi:** Jetson yere tek bir RTP akışı basıyor; yerdeki röle onu baytı baytına QGroundControl'e, gözlem arayüzüne (multicast) ve kayda çoğaltıyor. Hakeme giden kopya yeniden kodlanmadan MPEG-TS'e sarılıyor, çünkü ham RTP alıcı tarafta tarif bilgisi olmadan oynatılamıyor. Ölçülen gecikme RTP'de ~22 ms, MPEG-TS'te ~105 ms.
+- **Hakem saati:** Kilitlenme bildirimlerinin zamanı hakem sunucusunun saatine göre değerlendiriliyor. Mac betiği sunucunun saat API'sini birkaç kez sorgulayıp en kısa gidiş-dönüşlü ölçümle farkı hesaplıyor ve saati mikrosaniye çözünürlükle ayarlıyor. Orin betiği saati yer bilgisayarından alıyor ve NTP servislerini maskeleyerek ayarın geri alınmasını engelliyor.
+
 ## Bu sezon: batman-adv mesh ağı (devam ediyor)
 
-Takımın tüm hava ve kara araçları için tek bir mesh ağ kuruyorum. batman-adv, Linux kernel'inde çalışan bir katman 2 mesh protokolü. Araçlar tek bir ağı paylaşıyor ve birbirlerinin trafiğini aktarabiliyor.
+Takımın tüm hava araçları ve yer sistemleri için tek bir mesh ağ kuruyorum. batman-adv, Linux kernel'inde çalışan bir katman 2 mesh protokolü. Uçaklar ve yer sistemleri tek bir ağı paylaşıyor ve birbirlerinin trafiğini aktarabiliyor.
