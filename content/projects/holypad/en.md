@@ -35,7 +35,7 @@ I wrote the editor's core: the gap buffer, line nodes and document, the renderer
 - **Other:** in-line search and replace with KMP, ANSI-coloured selection, and a file explorer built on C++17 `<filesystem>` drawn as an overlay over the document.
 - **POSIX terminal handling:** raw mode via termios, asynchronous input via poll(), resize via SIGWINCH, and the VT100 alternate screen buffer to preserve shell history.
 
-![File explorer](explorer.png "The file explorer, drawn as an overlay over the document")
+![Editor](editor.png "A Markdown file open in the terminal: toolbar on top, line numbers on the left")
 
 ## Known limitations
 

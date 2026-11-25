@@ -1,14 +1,14 @@
-order: 5
+order: 6
 context: { tr: Kişisel, en: Personal }
 period: 2025 – 2026
 title: { tr: MavCs · .NET için MAVLink kütüphanesi, en: MavCs · a MAVLink library for .NET }
 summary:
   tr: MAVLink v1/v2 çerçeveleme, CRC-16/X25 ve UDP/seri bağlantı. pymavlink'e karşı doğrulandı.
   en: MAVLink v1/v2 framing, CRC-16/X25 and UDP/serial transports, verified against pymavlink.
-cover: frame.png
+cover: code.png
 cover_alt:
-  tr: "Baytları renklere ayrılmış bir MAVLink v2 HEARTBEAT çerçevesi ve çözülmüş alanları"
-  en: "A MAVLink v2 HEARTBEAT frame with colour-coded bytes and its decoded fields"
+  tr: "MavCs'in CRC-16/X25 tablosunu kuran C# kodu (Crc.cs)"
+  en: "C# code from MavCs that builds the CRC-16/X25 lookup table (Crc.cs)"
 tags: [C#, .NET 9, .NET 10, MAVLink, xUnit, GitHub Actions]
 links:
   - label: { tr: Kaynak kod, en: Source code }

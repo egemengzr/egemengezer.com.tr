@@ -1,4 +1,4 @@
-order: 6
+order: 8
 context: { tr: Programlama Lab II · ders projesi, en: Programming Lab II · course project }
 period: "2026"
 title: { tr: HolyPad · terminal metin editörü, en: HolyPad · terminal text editor }
@@ -6,10 +6,10 @@ summary:
   tr: İki kişilik projede editörün çekirdeğini yazdım. Satır başına gap buffer ve çift yönlü bağlı liste.
   en: Two-person project; I wrote the editor's core. Per-line gap buffers in a doubly linked list.
 result: { tr: O(1) amortize yazma, en: O(1) amortized typing }
-cover: editor.png
+cover: explorer.png
 cover_alt:
-  tr: "Terminalde açık bir Markdown dosyasıyla HolyPad"
-  en: "HolyPad in a terminal with a Markdown file open"
+  tr: "HolyPad'in dosya gezgini, include klasörü seçili"
+  en: "HolyPad's file explorer with the include folder selected"
 tags: [C++17, POSIX, VT100, CMake]
 links:
   - label: { tr: Kaynak kod, en: Source code }
