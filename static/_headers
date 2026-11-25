@@ -11,7 +11,11 @@
 # and preload, which are hard to undo. The CSP allows no scripts at all.
 # Styles are inline (one <style> per page, plus any in inlined SVG
 # diagrams); there is no user input on the site to inject into.
+#
+# Vary: Accept-Encoding tells caches between Cloudflare and the browser
+# (corporate proxies) to keep gzip, brotli and plain copies apart.
 /*
+  Vary: Accept-Encoding
   Strict-Transport-Security: max-age=31536000
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin

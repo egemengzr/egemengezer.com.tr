@@ -37,10 +37,10 @@ summary:
 description:
   tr: >-
     Egemen Gezer: gömülü sistemler ve gömülü Linux üzerine çalışan Bilgisayar
-    Mühendisliği öğrencisi. Projeler, deneyim ve iletişim.
+    Mühendisliği öğrencisi. NVIDIA Jetson, İHA yazılımı, projeler ve iletişim.
   en: >-
     Egemen Gezer: Computer Engineering student working on embedded systems and
-    embedded Linux. Projects, experience and contact.
+    embedded Linux. NVIDIA Jetson, UAV software, projects and contact.
 
 facts:
   - label: { tr: Konum, en: Location }
