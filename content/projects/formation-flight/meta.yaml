@@ -1,0 +1,12 @@
+order: 4
+context: Kılavuz KOUSTECH
+period: "2025"
+title: { tr: Lider-takipçi formasyon uçuşu, en: Leader-follower formation flight }
+summary:
+  tr: İki sabit kanatlı ArduPilot uçağı için takipçi kontrolcüsü. Yanal sapma PID'i, rüzgâr düzeltmeli hız komutu ve bağlantı kaybı failsafe'i.
+  en: A follower controller for two fixed-wing ArduPilot aircraft, with a cross-track PID, wind-corrected speed commands and a lost-link failsafe.
+cover: code.png
+cover_alt:
+  tr: "Takipçinin yanal sapma PID'inden Python kodu (crosstrackpid.py)"
+  en: "Python code from the follower's cross-track PID (crosstrackpid.py)"
+tags: [Python, pymavlink, ArduPilot, MAVLink, PID]
