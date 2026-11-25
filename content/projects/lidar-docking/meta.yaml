@@ -1,4 +1,4 @@
-order: 7
+order: 9
 context: { tr: Programlama Lab I · ders projesi, en: Programming Lab I · course project }
 period: "2025"
 title: { tr: Lidar ile yanaşma noktası tespiti, en: Lidar docking-point detection }
