@@ -73,12 +73,13 @@ experience:
     text:
       tr: >-
         Takım Teknofest 2026'da Türkiye 4.'sü oldu. Uçuş simülatörü, itki test standı
-        ve görüntü işleme hattı benim işlerim. Şu an tüm araçları bağlayan mesh ağını
-        kuruyorum.
+        ve görüntü işleme hattı benim işlerim. Şu an tüm hava araçlarını ve yer
+        sistemlerini bağlayan mesh ağını kuruyorum.
       en: >-
         The team placed 4th in Türkiye at Teknofest 2026. I built the flight
         simulator, the thrust test stand and the vision pipeline optimisation, and I
-        am now building the mesh network that links all our vehicles.
+        am now building the mesh network that links all our aircraft and ground
+        systems.
 
 skills:
   - label: { tr: Gömülü ve Linux, en: Embedded and Linux }

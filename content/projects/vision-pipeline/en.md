@@ -1,6 +1,6 @@
 ## Goal
 
-Run onboard target detection and tracking in real time, keep the QR-coded ground target readable in any lighting, and this season, connect all vehicles on a shared network.
+Run onboard target detection and tracking in real time, keep the QR-coded ground target readable in any lighting, and this season, connect all aircraft and ground systems on a shared network.
 
 ## Architecture
 
@@ -30,6 +30,17 @@ Both on FP16 | 55 | 50–60, drops to ~40
 - Selected the camera sensor (AR0234), lens and filter.
 - The competition's QR-coded target lies on the ground on a tarp and reflects the sun around midday, a problem for many teams. After researching it, I fitted a circular polarizing (CPL) filter: light reflected from non-metallic surfaces is largely polarized, so the filter suppresses the glare. Our team never had the problem.
 
+## Jetson environment and ground side
+
+For the code to work in the field I also prepared the flight computer, the video coming down to the ground and the clocks.
+
+- **Orin Nano setup script:** A staged, re-runnable script that takes the board from scratch to flight-ready. If it stops halfway, it skips finished work and resumes.
+  - OpenCV is built with CUDA, cuDNN and GStreamer for this board's architecture only (`CUDA_ARCH_BIN=8.7`). Before building, the script reads `CMakeCache.txt`; if GStreamer or CUDA is not enabled, the 1.5–3 hour build never starts.
+  - With 8 GB of RAM the build ran out of memory. The script adds a 16 GB swap file on the SSD and picks the number of parallel jobs as (RAM + swap) / 3 GB.
+  - Vision and telemetry live in separate virtual environments, so a package update on the vision side cannot break telemetry. The script checks this by testing that neither environment can see the other's packages.
+- **Video relay:** The Jetson sends a single RTP stream to the ground; the relay copies it byte for byte to QGroundControl, the observation UI (multicast) and a recording. The referee's copy is wrapped in MPEG-TS without re-encoding, because raw RTP cannot be played without a description of the stream on the receiving side. Measured latency is ~22 ms over RTP and ~105 ms over MPEG-TS.
+- **Referee clock:** Lock notifications are judged against the referee server's clock. The Mac script queries the server's time API several times, takes the sample with the shortest round trip to compute the offset and sets the clock with microsecond resolution. The Orin script takes the time from the ground computer and masks the NTP services so nothing undoes the setting.
+
 ## This season: batman-adv mesh network (in progress)
 
-I am building a single mesh network for all of the team's air and ground vehicles. batman-adv is a layer-2 mesh protocol that runs in the Linux kernel; vehicles share one network and can relay traffic for each other.
+I am building a single mesh network for all of the team's aircraft and ground systems. batman-adv is a layer-2 mesh protocol that runs in the Linux kernel; aircraft and ground systems share one network and can relay traffic for each other.
